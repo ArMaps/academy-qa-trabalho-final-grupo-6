@@ -1,6 +1,8 @@
 *** Settings ***
 Resource    ../base.robot
 
+Library    XML
+
 *** Variables ***
 ${MENU_HOME}       xpath=//android.widget.Button[@content-desc="Open navigation menu"]
 
@@ -11,6 +13,7 @@ ${INFORME_NOME}                xpath=//android.view.View[@content-desc="Informe 
 ${EMAIL_CADASTRO}              xpath=//android.widget.ImageView/android.widget.EditText[2]
 ${INFORME_EMAIL}               xpath=//android.view.View[@content-desc="Informe o e-mail."]
 ${INFORME_EMAIL_VALIDO}        xpath=//android.view.View[@content-desc="Informe um e-mail válido."]
+${EMAIL_CADASTRADO}            xpath=//android.view.View[@content-desc="E-mail já cadastrado. Utilize outro e-mail."]
 ${SENHA_CADASTRO}              xpath=//android.widget.ImageView/android.widget.EditText[3]
 ${INFORME_SENHA}               xpath=//android.view.View[@content-desc="Informe uma senha."]
 ${CONFIRMAR_SENHA_CADASTRO}    xpath=//android.widget.ImageView/android.widget.EditText[4]
@@ -24,11 +27,10 @@ ${ERRO_CADASTRO}               xpath=//android.view.View[contains(@content-desc,
 ${HOME_TXT}        xpath=//android.view.View[@content-desc="Home"]
 
 *** Keywords ***
-# Cenário:Registro de usuário
 Dado que o usuário acessa a tela de registro
     Espera o elemento e faz o clique    ${MENU_HOME}
     Espera o elemento e faz o clique    ${REGISTRE-SE}
-Quando preenche as informações obrigatórias email aleatorio
+Quando preenche as informações obrigatórias email aleatório
     [Arguments]     ${nome}        ${senha}    ${confirmar}
     ${email_random}    Email
     Espera o elemento faz o clique e faz o inputtext    ${NOME_CADASTRO}    ${nome}
@@ -62,8 +64,9 @@ Então visualiza um alerta no campo nome
     Element Attribute Should Match    ${INFORME_NOME}    content-desc    Informe o nome.
 
 Quando preenche todos os campos exceto o campo de email
-    [Arguments]     ${nome}        ${senha}    ${confirmar}
-    Espera o elemento faz o clique e faz o inputtext    ${NOME_CADASTRO}    ${nome}
+    [Arguments]        ${senha}    ${confirmar}
+    ${nome_random}    Name
+    Espera o elemento faz o clique e faz o inputtext    ${NOME_CADASTRO}    ${nome_random}
     Espera o elemento faz o clique e faz o inputtext    ${SENHA_CADASTRO}    ${senha}
     Espera o elemento faz o clique e faz o inputtext    ${CONFIRMAR_SENHA_CADASTRO}    ${confirmar}
 Então visualiza um alerta no campo email
@@ -98,7 +101,8 @@ Então visualiza um alerta em todos os campos obrigatórios
     Wait Until Element Is Visible    ${CONFIRME_SENHA}
 
 Então visualiza um alerta informe um email válido
-    Wait Until Element Is Visible    ${INFORME_EMAIL_VALIDO}
+    Wait Until Element Is Visible     ${INFORME_EMAIL_VALIDO}    
+    Element Attribute Should Match    ${INFORME_EMAIL_VALIDO}    content-desc    Informe um e-mail válido.
 
 Quando preenche o campo nome com 1 caractere
     [Arguments]     ${nome}
@@ -150,3 +154,48 @@ Quando preenche o campo senha com 13 caracteres
     [Arguments]    ${senha}    ${confirmar}
     Espera o elemento faz o clique e faz o inputtext    ${SENHA_CADASTRO}    ${senha}
     Espera o elemento faz o clique e faz o inputtext    ${CONFIRMAR_SENHA_CADASTRO}    ${confirmar}
+
+E insere um email com com 4 caracteres
+    [Arguments]    ${email}
+    Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    ${email}
+
+E insere um email com com 5 caracteres
+    [Arguments]    ${email}
+    Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    ${email}
+
+E insere um email com com 60 caracteres
+    [Arguments]
+    ${email_random}    Generate Random String  length=51
+    Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    ${email_random}@mail.com
+
+E insere um email com com 61 caracteres
+    [Arguments]
+    ${email_random}    Generate Random String  length=52
+    Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    ${email_random}@mail.com 
+
+Dado que o usuário já possui um usuário cadastrado
+    ${email_random_usado}    Email
+    Dado que o usuário acessa a tela de registro
+    Quando preenche as informações obrigatórias    teste    ${email_random_usado}    123456    123456
+    Set Global Variable    ${email_random_usado}
+    E clica em Registrar
+    Então visualiza a mensagem de Cadastro realizado
+    E retorna para a tela inicial
+Quando tenta realizar o cadastro utilizando o email já cadastrado anteriormente
+    Dado que o usuário acessa a tela de registro
+    Quando preenche as informações obrigatórias    Teste Academy    ${email_random_usado}    123456    123456
+Então visualiza a mensagem de email já cadastrado
+    Wait Until Element Is Visible    ${EMAIL_CADASTRADO}
+    AppiumLibrary.Element Attribute Should Match    ${EMAIL_CADASTRADO}    content-desc    E-mail já cadastrado. Utilize outro e-mail.
+
+E insere um email com formato inválido sem o nome utilizador
+     Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    @mail.com
+
+E insere um email com formato inválido sem o @
+     Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    grupo6mail.com     
+
+E insere um email com formato inválido sem o domínio
+     Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    grupo6@.com
+
+E insere um email com formato inválido sem o .com
+     Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    grupo6@mail
