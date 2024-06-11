@@ -1,0 +1,8 @@
+{
+    "message": [
+        "email should not be empty",
+        "email must be an email"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+}
