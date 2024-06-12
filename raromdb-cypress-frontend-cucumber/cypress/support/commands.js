@@ -23,3 +23,75 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+        body: {
+            name: nome,
+            email: email,
+            password: senha
+        }
+    }).then(function (response) {
+        id = response.body.id;
+        return id;
+    });
+});
+
+Cypress.Commands.add('criarFilme', function (token) {
+    return cy.fixture('criarFilme.json').then(function (filmeCriado) {
+        cy.request({
+            method: 'POST',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            body: filmeCriado,
+        });
+    });
+});
+
+Cypress.Commands.add('criarSegundoFilme', function (token) {
+    return cy.fixture('criarFilme2.json').then(function (filmeCriado) {
+        cy.request({
+            method: 'POST',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            body: filmeCriado,
+        });
+    });
+});
+
+Cypress.Commands.add('tornarAdm', function (token) {
+    return cy.request({
+        method: 'PATCH',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/admin',
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    });
+});
+
+Cypress.Commands.add('logarUser', function (email, senha) {
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+        body: {
+            email: email,
+            password: senha
+        }
+    });
+});
+
+Cypress.Commands.add('deleteMovie', function (id, token) {
+    return cy.request({
+        method: 'DELETE',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/' + id,
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+});
