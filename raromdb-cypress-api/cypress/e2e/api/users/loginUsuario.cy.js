@@ -6,7 +6,7 @@ describe('Login de usuário', () => {
   var email = faker.internet.email().toLowerCase();
   var senha = '123456';
   var token;
-  var tokenInvalido = 'etJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAyNiwiZW1haWwiOiJjYXJvbEBnZ2cuY29tIiwiaWF0IjoxNzE4MTEwNTQ2LCJleHAiOjE3MTgxMTQxNDZ9.O6Q6ZAS16gdyNJgwsnr7tbgp0faRXttlqUii3b4v-00';
+  var tokenInvalido = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDUxMiwiZW1haWwiOiJqcHBwQGdtYWlsLmNvbSIsImlhdCI6MTcxODIxOTI5MiwiZXhwIjoxNzE4MjIyODkyfQ.3x4O4MfE1m4ZWUK2zmi7Wf1h1FvRgSFKz3dnKnHkbR8';
 
   before(function () {
     cy.cadastroUser(nome, email, senha);
