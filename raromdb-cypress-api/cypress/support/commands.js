@@ -35,7 +35,7 @@ Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
         }
     }).then(function (response) {
         var id = response.body.id;
-        return id;
+        return { id: id }
     });
 });
 
@@ -49,3 +49,36 @@ Cypress.Commands.add('tornarCritico', function (token) {
         failOnStatusCode: false
     });
 });
+
+Cypress.Commands.add('logarUsuario', (email, password) => {
+    cy.request({
+        method: 'POST',
+        url: '/api/auth/login',
+        body: {
+            email: email,
+            password: password
+        }
+    })
+})
+
+Cypress.Commands.add('deletarUsuario', (id, auth) => {
+    cy.request({
+        method: 'DELETE',
+        url: '/api/users/' + id,
+        headers: {
+            Authorization: 'Bearer ' + auth
+        },
+        failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('promoverAdmin', (auth) => {
+    cy.request({
+        method: 'PATCH',
+        url: '/api/users/admin',
+        headers: {
+            Authorization: 'Bearer ' + auth
+        },
+        failOnStatusCode: false
+    })
+})
