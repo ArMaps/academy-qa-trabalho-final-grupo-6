@@ -1,6 +1,8 @@
 export default class HomePage {
     linkLogin = '[href="/login"]';
-    linkProfile = '[href="/profile"]';
+  
+    linkRegistrar = '[href="/register"]';
+    linkPerfil = '[href="/profile"]';
 
     inputPesquisa = '.search-input';
 
@@ -32,5 +34,14 @@ export default class HomePage {
 
     clickMovieCard() {
         cy.get(this.movieCard).should('be.visible').eq(0).click();
+
+    }
+    clickLinkRegistrar(){
+        cy.get(this.linkRegistrar).should('be.visible').click();
+    }
+
+    clickLinkPerfil(){
+        cy.get(this.linkPerfil).should('be.visible').click();
+
     }
 }
