@@ -2,7 +2,11 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { faker } from "@faker-js/faker";
 import HomePage from "../pages/home.page";
 import RegistroPage from "../pages/registroUsuario.page";
+import PerfilPage from "../pages/perfil.page";
+import GerenciaPage from "../pages/gerencia.page";
 
+var paginaGerencia = new GerenciaPage();
+var paginaPerfil = new PerfilPage();
 var paginaHome = new HomePage();
 var paginaRegistro = new RegistroPage();
 var novoEmail;
@@ -109,6 +113,16 @@ When('preenche o campo nome com espaços em branco', function(){
     paginaRegistro.typeNome('          ');
 });
 
+When('se cadastra corretamente', function(){
+    novoEmail = faker.internet.email().toLowerCase();
+    cy.cadastrarUsuario(nomeUsuario, novoEmail, password, password);
+});
+
+When('acessa a área de gerenciamento de conta', function(){
+    paginaHome.clickLinkPerfil();
+    paginaPerfil.clickLinkGerencia();
+});
+
 
 Then('o usuário é cadastrado', function(){
     cy.wait('@postUsers');
@@ -158,4 +172,8 @@ Then('uma mensagem de erro é exibida no campo de confirmar senha', function(){
 
 Then('o usuário não é cadastrado', function(){
     cy.contains(paginaRegistro.modalMessege, 'Erro');
+});
+
+Then('ele pode verificar os tipos de usuários existentes', function(){
+    cy.get(paginaGerencia.campoTipoUser).contains('ComumAdministradorCrítico(a)')
 });

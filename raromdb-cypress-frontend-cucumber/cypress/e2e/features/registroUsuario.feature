@@ -45,6 +45,11 @@ E confirma a senha corretamente
 E confirma a operação
 Então o usuário deve ser cadastrado com o tipo 0
 
+Cenário: Devem existir 3 tipos de usuário: (0)Comum, (1)Administrador e (2)Crítico
+E se cadastra corretamente
+E acessa a área de gerenciamento de conta
+Então ele pode verificar os tipos de usuários existentes
+
 Cenário: Não deve ser possível cadastrar um usuário com um email já existente
 E preenche o campo nome corretamente
 E preenche o campo email com um email já cadastrado

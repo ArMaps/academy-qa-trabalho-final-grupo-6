@@ -31,4 +31,12 @@ export default class RegistroPage{
     clickBtnCadastrar(){
         cy.get(this.btnCadastrar).should('be.visible').and('be.enabled').click();
     }
+
+    cadastrarUsuario(nome, email, senha, confirmaSenha){
+        this.typeNome(nome);
+        this.typeEmail(email);
+        this.typeSenha(senha);
+        this.typeConfirmaSenha(confirmaSenha);
+        this.clickBtnCadastrar();
+    }
 }
