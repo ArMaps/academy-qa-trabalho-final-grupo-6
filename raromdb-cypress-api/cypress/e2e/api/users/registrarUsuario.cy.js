@@ -1,6 +1,6 @@
 import { fakerPT_BR, faker } from '@faker-js/faker';
-const  registroUsuario = require("../fixtures/registroUsuario.json");
-const  registroUsuarioJaCriado = require("../fixtures/registroUsuario.json");
+const  registroUsuario = require("../../../fixtures/registroUsuario.json");
+const  registroUsuarioJaCriado = require("../../../fixtures/registroUsuario.json");
 registroUsuario.name = fakerPT_BR.person.fullName().toLowerCase();
 registroUsuario.email = fakerPT_BR.internet.email().toLowerCase();
 const primeiroNome  = faker.person.firstName();
@@ -46,7 +46,6 @@ describe('testes da rota de registro de usuário', () => {
                 expect(response.status).to.be.eq(201)
                 expect(response.body).to.have.property('type')
                 expect(response.body.type).to.equal(0)
-                //0 = comum, 1 = admin, 2 = crítico;
                 expect(response.body).to.have.property('active')
                 expect(response.body.active).to.equal(true)
             })
@@ -140,7 +139,7 @@ describe('testes da rota de registro de usuário', () => {
             })
         })
 /////////////////////////////////////////BUG/////////////////////////////////////////////
-it.only('deve ser possível registrar usuário com email com 5 dígitos', () => {
+it('deve ser possível registrar usuário com email com 5 dígitos', () => {
     cy.request({
         method: "POST",
         url: '/api/users',
@@ -326,8 +325,8 @@ it.only('deve ser possível registrar usuário com email com 5 dígitos', () => 
             }).then((response) => {
                 expect(response.status).to.be.eq(400)
                 expect(response.body).to.be.an('object');
-                cy.fixture('senhaVazia.json').then(function (senhaVazia) {
-                    expect(response.body).to.deep.eq(senhaVazia)
+                cy.fixture('senhaVazias.json').then(function (senhaVazias) {
+                    expect(response.body).to.deep.eq(senhaVazias)
                 });
             })
         }),
@@ -368,7 +367,7 @@ it.only('deve ser possível registrar usuário com email com 5 dígitos', () => 
             cy.registroUser(nome,'zi'+email,senha) .then((response)=>{
                      id = response.body.id;                     
                 });
-                cy.logarUser('zi'+email, senha).then((usuario) => {
+                cy.loginUsuario('zi'+email, senha).then((usuario) => {
                     token = usuario.body.accessToken;
                     cy.promoverAdmin(token);
                     cy.deletaUsuario(idZ, token);

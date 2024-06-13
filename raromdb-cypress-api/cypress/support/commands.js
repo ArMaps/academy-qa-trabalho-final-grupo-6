@@ -35,7 +35,7 @@ Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
         }
     }).then(function (response) {
         var id = response.body.id;
-        return id;
+        return { id: id }
     });
 });
 
@@ -73,18 +73,32 @@ Cypress.Commands.add('loginUsuario', function (email, senha) {
             email: email,
             password: senha
         }
-    });
-});
+    })
+})
 
-Cypress.Commands.add('tornarAdm', function (token) {
-    return cy.request({
+Cypress.Commands.add('deletarUsuario', (id, auth) => {
+    cy.request({
+        method: 'DELETE',
+        url: '/api/users/' + id,
+        headers: {
+            Authorization: 'Bearer ' + auth
+        },
+        failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('promoverAdmin', (auth) => {
+    cy.request({
         method: 'PATCH',
         url: '/api/users/admin',
         headers: {
-            Authorization: 'Bearer ' + token
-        }
-    });
-});
+            Authorization: 'Bearer ' + auth
+        },
+        failOnStatusCode: false
+    })
+})
+   
+
 
 Cypress.Commands.add('deletaUsuario', function (id, token) {
     return cy.request({
@@ -161,8 +175,6 @@ Cypress.Commands.add('buscarFilmeId', function(id, token){
     });
 });
 
-///////////////////////////// LUAN COMMANDS /////////////////////////////////////////////
-
 Cypress.Commands.add('registroUser', function (nome, email, senha) {
     return cy.request({
         method: 'POST',
@@ -173,27 +185,8 @@ Cypress.Commands.add('registroUser', function (nome, email, senha) {
             password: senha
         }
     })
-    // .then(function (response) {
-    //     const id = response.body.id;
-    //     return id;
-         
-    // });
 });
-Cypress.Commands.add('logarUser', function (email, senha) {
-    return cy.request({
-        method: 'POST',
-        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
-        body: {
-            email: email,
-            password: senha
-        }
-    })
-    // .then(function (response) {
-    //     var token = response.body.accessToken;
-    //     cy.log(token);
-    //     return token;
-    // });  
-});
+
 Cypress.Commands.add('promoverCritico', (token) => {
     cy.request({
         method: 'PATCH',
@@ -282,4 +275,3 @@ Cypress.Commands.add('deleteFilme', function (id, token) {
         }
     })
 });
-///////////////////////////// LUAN COMMANDS /////////////////////////////////////////////
