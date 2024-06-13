@@ -1,0 +1,8 @@
+{
+  "message": [
+    "score must be a number conforming to the specified constraints",
+    "score should not be empty"
+  ],
+  "error": "Bad Request",
+  "statusCode": 400
+}

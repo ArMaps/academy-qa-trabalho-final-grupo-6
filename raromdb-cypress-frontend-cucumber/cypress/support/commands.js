@@ -23,9 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
 import RegistroPage from "./pages/registroUsuario.page";
 var paginaRegistro = new RegistroPage();
 
 Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
     return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
+
+
+Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+        body: {
+            name: nome,
+            email: email,
+            password: senha
+        }
+    }).then(function (response) {
+        id = response.body.id;
+        return id;
+    });
+
 });

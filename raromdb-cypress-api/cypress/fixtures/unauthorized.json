@@ -1,0 +1,5 @@
+{
+    "message": "Access denied.",
+    "error": "Unauthorized",
+    "statusCode": 401
+}
