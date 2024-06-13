@@ -1,4 +1,5 @@
-export default class PerfilPage{
+
+export default class PerfilPage {
     linkGerencia = '[href="/account"]';
 
     clickLinkGerencia() {

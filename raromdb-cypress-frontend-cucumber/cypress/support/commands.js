@@ -24,6 +24,14 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+
+import RegistroPage from "./pages/registroUsuario.page";
+var paginaRegistro = new RegistroPage();
+
+Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
+    return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
+
+
 Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
     return cy.request({
         method: 'POST',
@@ -37,4 +45,5 @@ Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
         var id = response.body.id;
         return id;
     });
+
 });
