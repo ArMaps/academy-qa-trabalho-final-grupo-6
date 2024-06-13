@@ -8,6 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/support/steps/[filepart].step.js"
+  },
   "description": "",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^20.0.5",

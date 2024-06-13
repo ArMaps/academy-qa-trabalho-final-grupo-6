@@ -13,7 +13,7 @@ describe('Testes da /api/users/{id}', () => {
             cy.cadastroUser(nome, email, senha).then(function (response) {
                 id = response.id
             })
-            cy.logarUsuario(email, senha).then((response) => {
+            cy.loginUsuario(email, senha).then((response) => {
                 auth = response.body.accessToken
             })
         })
@@ -317,10 +317,11 @@ describe("Testes da /api/users/{id}", () => {
             cy.cadastroUser(nome, emailadmin, senha).then(function (response) {
                 id = response.id
             })
-            cy.logarUsuario(emailadmin, senha).then((response) => {
+            cy.loginUsuario(emailadmin, senha).then((response) => {
                 auth = response.body.accessToken
+                cy.promoverAdmin(auth);
             })
-            cy.promoverAdmin(auth)
+            
         })
         afterEach(() => {
             cy.deletarUsuario(id, auth)
@@ -351,10 +352,10 @@ describe("Testes da /api/users/{id}", () => {
             cy.cadastroUser(nome, emailcritico, senha).then(function (response) {
                 id = response.id
             })
-            cy.logarUsuario(emailcritico, senha).then((response) => {
-                auth = response.body.accessToken
+            cy.loginUsuario(emailcritico, senha).then((response) => {
+                auth = response.body.accessToken;
+                cy.tornarCritico(auth);
             })
-            cy.tornarCritico(auth)
         })
         afterEach(() => {
             cy.deletarUsuario(id, auth)
