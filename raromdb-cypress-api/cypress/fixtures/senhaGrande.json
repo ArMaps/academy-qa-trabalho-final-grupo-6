@@ -1,0 +1,7 @@
+{
+    "message": [
+      "password must be shorter than or equal to 12 characters"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+  }

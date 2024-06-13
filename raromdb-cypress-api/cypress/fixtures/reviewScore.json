@@ -1,0 +1,5 @@
+{
+    "message": "Score should be between 1 and 5",
+    "error": "Bad Request",
+    "statusCode": 400
+}
