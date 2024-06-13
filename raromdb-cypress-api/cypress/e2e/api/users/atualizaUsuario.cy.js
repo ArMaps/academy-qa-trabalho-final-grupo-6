@@ -183,7 +183,7 @@ describe('Testes da /api/users/{id}', () => {
                 expect(response.body.message[1]).to.be.eq("name must be a string")
             })
         })
-        it('Deve ser possivel ter um nome maior que 100 caracteres', () => {
+        it('Deve ser possivel ter um nome igual a 100 caracteres', () => {
             cy.request({
                 method: 'PUT',
                 url: '/api/users/' + id,
