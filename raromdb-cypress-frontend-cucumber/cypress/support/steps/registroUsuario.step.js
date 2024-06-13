@@ -123,6 +123,14 @@ When('acessa a área de gerenciamento de conta', function(){
     paginaPerfil.clickLinkGerencia();
 });
 
+When('preenche a senha apenas com espaços em branco', function(){
+    paginaRegistro.typeSenha('      ');
+});
+
+When('confirma essa senha com espaços em branco', function(){
+    paginaRegistro.typeConfirmaSenha('      ');
+});
+
 
 Then('o usuário é cadastrado', function(){
     cy.wait('@postUsers');
@@ -171,9 +179,13 @@ Then('uma mensagem de erro é exibida no campo de confirmar senha', function(){
 });
 
 Then('o usuário não é cadastrado', function(){
-    cy.contains(paginaRegistro.modalMessege, 'Erro');
+    cy.contains(paginaRegistro.modalMessege, 'Falha no cadastro');
 });
 
 Then('ele pode verificar os tipos de usuários existentes', function(){
     cy.get(paginaGerencia.campoTipoUser).contains('ComumAdministradorCrítico(a)')
+});
+
+Then('deve ser exibida uma mensagem de erro impedindo o cadastro', function(){
+    cy.get(paginaRegistro.modalMessege).contains('Falha no cadastro');
 });

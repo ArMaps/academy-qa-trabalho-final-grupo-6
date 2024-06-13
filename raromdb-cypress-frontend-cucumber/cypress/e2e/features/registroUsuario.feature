@@ -128,3 +128,11 @@ E preenche o campo senha corretamente
 E confirma a senha corretamente
 E confirma a operação
 Então o usuário não é cadastrado
+
+Cenário: Não deve ser possível cadastrar um usuário com a senha composta apenas por espaços em branco
+E preenche o campo nome corretamente
+E preenche o campo email corretamente
+E preenche a senha apenas com espaços em branco
+E confirma essa senha com espaços em branco
+E confirma a operação
+Então deve ser exibida uma mensagem de erro impedindo o cadastro
