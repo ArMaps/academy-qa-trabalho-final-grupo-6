@@ -1,3 +1,4 @@
+
 export default class PerfilPage {
     linkGerencia = '[href="/account"]';
 
