@@ -101,6 +101,7 @@ describe('Cenários de testes de tornar usuário Administrador', () => {
             });
         })
     })
+
     describe('Cenários de BAD REQUEST', () => {
         it('dNão deve ser possível tornar usuario em admin sem que esteja autenticado', () => {
             cy.registroUser(nome, '5' + email, senha);
@@ -120,5 +121,6 @@ describe('Cenários de testes de tornar usuário Administrador', () => {
                 });
             })
         })
+        
     })
 })
