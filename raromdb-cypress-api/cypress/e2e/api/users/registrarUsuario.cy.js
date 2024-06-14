@@ -177,7 +177,6 @@ it('deve ser possível registrar usuário com email com 5 dígitos', () => {
                 expect(response.body).to.have.property('name')
                 expect(response.body.name).to.equal(registroUsuario.name)
                 expect(response.body).to.have.property('email')
-                //expect(response.body.email).to.equal(grandeEmail + "tes@qa.com")
                 expect(response.body).to.have.property('type')
                 expect(response.body.type).to.equal(0)
                 expect(response.body).to.have.property('active')

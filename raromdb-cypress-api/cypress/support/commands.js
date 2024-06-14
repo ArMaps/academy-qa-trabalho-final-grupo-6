@@ -247,6 +247,20 @@ Cypress.Commands.add('criarReview', function (token, idFilme) {
         }
     });
 });
+Cypress.Commands.add('criarReview2', function (token, idFilme) {
+    return cy.request({
+        method: 'POST',
+        url: '/api/users/review',
+        headers: {
+            Authorization: 'Bearer ' + token
+        },
+        body: {
+            movieId: idFilme,
+            score: 2,
+            reviewText: "Ruim, poderia ser melhor"
+        }
+    });
+});
 Cypress.Commands.add('buscarFilmeId', function(id, token){
     return cy.request({
         method: 'GET',
