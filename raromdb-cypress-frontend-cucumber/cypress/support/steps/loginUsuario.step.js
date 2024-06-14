@@ -59,8 +59,23 @@ When('não informa o email', function () { });
 
 When('não informa a senha', function () { });
 
-When('loga no sistema', function () {
-    paginaLogin.typeLogin(email, senha);
+When('loga com sucesso', function(){
+    cy.intercept('POST', '/api/auth/login').as('loginUser');
+    cy.logarUsuarioFront(email, senha);
+    cy.wait('@loginUser');
+});
+
+When('ele tenta atualizar o usuário com seu login expirado', function(){
+    cy.intercept('PUT', '/api/users/' + id, {
+        statusCode: 401,
+        fixture: "acessoNegado.json"
+    }).as('usuarioExpirado');
+
+    paginaLogin.clickLinkPerfil();
+    paginaPerfil.clickLinkGerencia();
+    paginaGerencia.typeNome('Tentando alterar nome');
+    paginaGerencia.clickBtnConfirmar();
+    cy.wait('@usuarioExpirado');
 });
 
 
@@ -100,4 +115,8 @@ Then('não pode atualizar seus dados depois de 60 minutos de sessão', function 
 
 Then('uma mensagem de erro é exibida', function () {
     cy.get(paginaGerencia.modalMessege).invoke('text').should('eq', 'Ocorreu um erroNão foi possível atualizar os dados.');
+});
+
+Then('ele deve ser redirecionado para a tela de login', function(){
+    cy.get(paginaLogin.linkLogin).should('be.visible');
 });
