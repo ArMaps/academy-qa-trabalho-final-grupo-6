@@ -1,0 +1,8 @@
+{
+    "message": [
+        "password must be longer than or equal to 6 characters",
+        "password should not be empty"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+}

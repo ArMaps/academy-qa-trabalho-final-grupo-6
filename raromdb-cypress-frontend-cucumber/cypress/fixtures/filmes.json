@@ -1,0 +1,63 @@
+[
+    {
+        "id": 1,
+        "title": "O Rei Leão",
+        "genre": "Aventura e ação",
+        "description": "Um traíra trai o irmão e faz o sobrinho ter rancor",
+        "durationInMinutes": 88,
+        "releaseYear": 1994
+    },
+    {
+        "id": 2,
+        "title": "O Rei",
+        "genre": "Ação",
+        "description": "Um menino se aventurando",
+        "durationInMinutes": 92,
+        "releaseYear": 2015
+    },
+    {
+        "id": 3,
+        "title": "Kenyon o retorno",
+        "genre": "Terror",
+        "description": "defendo hic tutamen defero tenus crastinus",
+        "totalRating": null,
+        "durationInMinutes": 120,
+        "releaseYear": 2000
+    },
+    {
+        "id": 4,
+        "title": "Carolyn o retorno",
+        "genre": "Terror",
+        "description": "calco audeo traho clibanus valde illum vae ratione praesentium",
+        "totalRating": null,
+        "durationInMinutes": 120,
+        "releaseYear": 2000
+    },
+    {
+        "id": 5,
+        "title": "Sidney o retorno",
+        "genre": "Terror",
+        "description": "adeo curo summisse conqueror animus tot cibo arx vobis",
+        "totalRating": null,
+        "durationInMinutes": 120,
+        "releaseYear": 2000
+    },
+    {
+        "id": 6,
+        "title": "Rosario o retorno",
+        "genre": "Terror",
+        "description": "votum ascit ocer victoria caterva tempore",
+        "totalRating": null,
+        "durationInMinutes": 120,
+        "releaseYear": 2000
+    },
+    {
+        "id": 7,
+        "title": "Star Wars: O Império Contra-Ataca",
+        "genre": "Épico, Aventura, Ficção científica",
+        "description": "As forças imperais comandadas por Darth Vader lançam um ataque contra os membros da resistência, que são obrigados a fugir. Enquanto isso, Luke Skywalker tenta encontrar o Mestre Yoda, que poderá ensiná-lo a dominar a Força e torná-lo um cavaleiro Jedi.",
+        "totalRating": null,
+        "durationInMinutes": 124,
+        "releaseYear": 1980
+    }
+]

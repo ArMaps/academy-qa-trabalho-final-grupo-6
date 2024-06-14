@@ -19,7 +19,7 @@ describe('Cenários de testes de Listar Usuários', () => {
             })
             cy.registroUser(nome, '1'+ email, senha).then((Usuario)=>{
                 id1= Usuario.body.id;
-                cy.logarUser('1'+ email, senha).then((usuario) => {
+                cy.loginUsuario('1'+ email, senha).then((usuario) => {
                     token = usuario.body.accessToken;
                     cy.promoverAdmin(token);
                     cy.request({
@@ -48,7 +48,7 @@ describe('Cenários de testes de Listar Usuários', () => {
             cy.registroUser(nome,'2'+ email, senha).then((Usuario)=>{
                 id2= Usuario.body.id;
             })
-            cy.logarUser('2'+ email, senha).then((usuario) => {
+            cy.loginUsuario('2'+ email, senha).then((usuario) => {
                 token2 = usuario.body.accessToken;
                 cy.request({
                     method: 'GET',
@@ -70,7 +70,7 @@ describe('Cenários de testes de Listar Usuários', () => {
             cy.registroUser(nome,'3'+ email, senha).then((Usuario)=>{
                 id3= Usuario.body.id;
             })
-            cy.logarUser('3'+ email, senha).then((usuario) => {
+            cy.loginUsuario('3'+ email, senha).then((usuario) => {
                 token3 = usuario.body.accessToken;
                 cy.promoverCritico(token3);
                 cy.request({
