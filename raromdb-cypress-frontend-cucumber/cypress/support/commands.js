@@ -26,11 +26,14 @@
 
 
 import RegistroPage from "./pages/registroUsuario.page";
+import LoginPage from "./pages/login.page";
 var paginaRegistro = new RegistroPage();
+var paginaLogin = new LoginPage();
 
 Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
     return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
 
+});
 
 Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
     return cy.request({
@@ -94,6 +97,10 @@ Cypress.Commands.add('logarUser', function (email, senha) {
     });
 });
 
+Cypress.Commands.add('logarUsuarioFront', function(email, senha){
+    return paginaLogin.typeLogin(email, senha);
+});
+
 Cypress.Commands.add('deleteMovie', function (id, token) {
     return cy.request({
         method: 'DELETE',
@@ -102,4 +109,4 @@ Cypress.Commands.add('deleteMovie', function (id, token) {
             Authorization: 'Bearer ' + token
         }
     })
-});
+}); 
