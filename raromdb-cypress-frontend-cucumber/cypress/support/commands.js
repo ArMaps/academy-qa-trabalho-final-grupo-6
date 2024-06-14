@@ -30,6 +30,7 @@ var paginaRegistro = new RegistroPage();
 
 Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
     return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
+});
 
 
 Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
@@ -102,4 +103,4 @@ Cypress.Commands.add('deleteMovie', function (id, token) {
             Authorization: 'Bearer ' + token
         }
     })
-});
+}); 
