@@ -444,3 +444,59 @@ Cenário: não deve ser possível fazer review de filme texto com 501 caracteres
 
 ###################################################################################
 ###################################################################################
+
+                            # PESQUISAR FILME POR ID
+
+Funcionalidade: Pesquisar Filme por Id
+
+Contexto: o usuario deve ter acessado a funcionalidade
+  Dado que usuario acessa a funcionalidade de Pesquisar Filme por Id
+
+Cenário: deve ser possível Pesquisar Filme por Id sendo usuario não autenticado
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível fazer a Pesquisa de Filme por Id
+
+Cenário: deve ser possível Pesquisar Filme por Id sendo usuario do tipo comum
+  Dado que está autenticado no site
+  E que é um usuario do tipo comum
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível fazer a Pesquisa de Filme por Id
+
+Cenário: deve ser possível Pesquisar Filme por Id sendo usuario do tipo crítico
+  Dado que está autenticado no site
+  E que é um usuario do tipo critico
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível fazer a Pesquisa de Filme por Id
+
+Cenário: deve ser possível Pesquisar Filme por Id sendo usuario do tipo admin
+  Dado que está autenticado no site
+  E que é um usuario do tipo admin
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível fazer a Pesquisa de Filme por Id
+
+Cenário: deve ser possível consultar os detalhes dos filmes registrados no catálogo
+  Dado que está autenticado no site
+  E que é um usuario do tipo comum
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível consultar os detalhes dos filmes registrados no catálogo
+
+Cenário: deve ser possível visualizar um totalizador das avaliações da audiência
+  Dado que está autenticado no site
+  E que é um usuario do tipo comum
+  Quando fizer a Pesquisa de Filme por Id
+  Então Deve ser possível visualizar um totalizador das avaliações da audiência
+
+Cenário: deve ser possível visualizar um totalizador das avaliações de críticos
+  Dado que está autenticado no site
+  E que é um usuario do tipo critico
+  Quando fizer a Pesquisa de Filme por Id
+  Então Deve ser possível visualizar um totalizador das avaliações de críticos
+
+Cenário: deve ser possível visualizar os detalhes das avaliações,
+  Dado que está autenticado no site
+  E que é um usuario do tipo comum
+  Quando fizer a Pesquisa de Filme por Id
+  Então deve ser possível visualizar os detalhes das avaliações
+
+###################################################################################
+###################################################################################

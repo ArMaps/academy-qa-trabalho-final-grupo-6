@@ -32,8 +32,8 @@ var paginaLogin = new LoginPage();
 
 Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
     return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
-});
 
+});
 
 Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
     return cy.request({
