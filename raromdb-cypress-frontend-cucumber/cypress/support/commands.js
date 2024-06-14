@@ -26,7 +26,9 @@
 
 
 import RegistroPage from "./pages/registroUsuario.page";
+import LoginPage from "./pages/login.page";
 var paginaRegistro = new RegistroPage();
+var paginaLogin = new LoginPage();
 
 Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
     return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
@@ -93,6 +95,10 @@ Cypress.Commands.add('logarUser', function (email, senha) {
             password: senha
         }
     });
+});
+
+Cypress.Commands.add('logarUsuarioFront', function(email, senha){
+    return paginaLogin.typeLogin(email, senha);
 });
 
 Cypress.Commands.add('deleteMovie', function (id, token) {
