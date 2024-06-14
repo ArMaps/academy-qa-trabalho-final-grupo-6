@@ -43,3 +43,8 @@ E confirma a operação
 Então ele pode logar no sistema
 Mas não pode atualizar seus dados depois de 60 minutos de sessão
 E uma mensagem de erro é exibida
+
+Cenário: O usuário com login expirado deve ser redirecionado para a tela de login
+E loga com sucesso
+E ele tenta atualizar o usuário com seu login expirado
+Então ele deve ser redirecionado para a tela de login

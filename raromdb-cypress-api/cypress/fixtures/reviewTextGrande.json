@@ -1,0 +1,7 @@
+{
+    "message": [
+      "reviewText must be shorter than or equal to 500 characters"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+}

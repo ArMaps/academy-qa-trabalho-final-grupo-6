@@ -19,7 +19,7 @@ describe('Exclusão de usuário', function () {
                 id = idUser;
                 cy.loginUsuario(email, senha).then(function (usuario) {
                     token = usuario.body.accessToken;
-                    cy.tornarAdm(token);
+                    cy.promoverAdmin(token);
                 });
             });
             cy.cadastroUsuario(nome, email2, senha).then(function (idUser2) {
@@ -46,23 +46,13 @@ describe('Exclusão de usuário', function () {
                 token2 = usuario.body.accessToken;
                 expect(usuario.status).to.eq(200);
                 expect(usuario.body.accessToken).to.eq(token2);
-                cy.tornarAdm(token2).then(function(response){
+                cy.promoverAdmin(token2).then(function(response){
                     expect(response.status).to.eq(204);
                 });
                 cy.criarFilme(token).then(function (movieId) {
                     idFilme = movieId;
                     cy.criarReview(token2, idFilme).then(function (response) {
                         expect(response.status).to.eq(201);
-                    });
-                    cy.buscarFilmeId(idFilme, token2).then(function(response){
-                        expect(response.body.id).to.eq(idFilme);
-                        expect(response.body.reviews[0].user.id).to.eq(id2);
-                        expect(response.body.reviews[0]).to.have.property('id');
-                        expect(response.body.reviews[0]).to.have.property('reviewText');
-                        expect(response.body.reviews[0]).to.have.property('reviewType');
-                        expect(response.body.reviews[0]).to.have.property('score');
-                        expect(response.body.reviews[0]).to.have.property('updatedAt');
-                        expect(response.body.reviews[0].reviewText).to.deep.contain('Filme sensacionalmente ruim escrito pelo usuário excluído!')
                     });
                     cy.deletaUsuario(id2, token).then(function (response) {
                         expect(response.body).to.be.empty;

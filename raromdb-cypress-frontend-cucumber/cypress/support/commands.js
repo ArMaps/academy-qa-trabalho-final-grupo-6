@@ -24,6 +24,17 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+
+import RegistroPage from "./pages/registroUsuario.page";
+import LoginPage from "./pages/login.page";
+var paginaRegistro = new RegistroPage();
+var paginaLogin = new LoginPage();
+
+Cypress.Commands.add('cadastrarUsuario', function(nome, email, senha, confirmaSenha){
+    return paginaRegistro.cadastrarUsuario(nome, email, senha, confirmaSenha);
+
+});
+
 Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
     return cy.request({
         method: 'POST',
@@ -34,7 +45,68 @@ Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
             password: senha
         }
     }).then(function (response) {
-        id = response.body.id;
+         var id = response.body.id;
         return id;
     });
 });
+
+Cypress.Commands.add('criarFilme', function (token) {
+    return cy.fixture('criarFilme.json').then(function (filmeCriado) {
+        cy.request({
+            method: 'POST',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            body: filmeCriado,
+        });
+    });
+});
+
+Cypress.Commands.add('criarSegundoFilme', function (token) {
+    return cy.fixture('criarFilme2.json').then(function (filmeCriado) {
+        cy.request({
+            method: 'POST',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            body: filmeCriado,
+        });
+    });
+});
+
+Cypress.Commands.add('tornarAdm', function (token) {
+    return cy.request({
+        method: 'PATCH',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/admin',
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    });
+});
+
+Cypress.Commands.add('logarUser', function (email, senha) {
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+        body: {
+            email: email,
+            password: senha
+        }
+    });
+});
+
+Cypress.Commands.add('logarUsuarioFront', function(email, senha){
+    return paginaLogin.typeLogin(email, senha);
+});
+
+Cypress.Commands.add('deleteMovie', function (id, token) {
+    return cy.request({
+        method: 'DELETE',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/' + id,
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+}); 
