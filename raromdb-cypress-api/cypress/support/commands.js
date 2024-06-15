@@ -350,3 +350,14 @@ Cypress.Commands.add("loginComumCompleto", function () {
     );
   });
 });
+
+Cypress.Commands.add("criarFilmePersonalizado", function (token, movie) {
+  return cy.request({
+    method: "POST",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/movies",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    body: movie,
+  });
+});
