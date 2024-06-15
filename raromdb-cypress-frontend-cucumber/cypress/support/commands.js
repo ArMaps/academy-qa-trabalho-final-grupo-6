@@ -110,3 +110,33 @@ Cypress.Commands.add('deleteMovie', function (id, token) {
         }
     })
 }); 
+
+Cypress.Commands.add('criarReview', function(idFilme, token){
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/review',
+        headers: {
+            Authorization: 'Bearer ' + token
+        },
+        body: {
+            movieId: idFilme,
+            score: 5,
+            reviewText: "O filme Rei Leão é uma obra de arte divina. Todos deveriam assistir para moldar o caráter."
+        }
+    });
+});
+
+Cypress.Commands.add('criarNovaReview', function(idFilme, token){
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/review',
+        headers: {
+            Authorization: 'Bearer ' + token
+        },
+        body: {
+            movieId: idFilme,
+            score: 4,
+            reviewText: "O filme Rei Leão é muito bom. Essa é minha segunda review!"
+        }
+    });
+});
