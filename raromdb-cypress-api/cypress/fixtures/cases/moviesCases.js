@@ -52,3 +52,4 @@ export const movieCases = [
     releaseYear: 1984,
   },
 ];
+
