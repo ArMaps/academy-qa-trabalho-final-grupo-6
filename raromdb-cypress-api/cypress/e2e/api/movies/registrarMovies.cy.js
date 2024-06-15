@@ -1,4 +1,4 @@
-import {movieCases} from "../../../fixtures/cases/movieCases";
+import { movieCases } from "../../../fixtures/cases/movieCases";
 
 describe("Criar Filmes", () => {
   let user, movieId;
@@ -14,7 +14,9 @@ describe("Criar Filmes", () => {
       cy.deleteFilme(movieId);
     }
     if (user?.id && Cypress.env("token")) {
-      cy.deletaUsuario(user?.id, Cypress.env("token"));
+      cy.deletaUsuario(user?.id, Cypress.env("token")).then(() => {
+        Cypress.env("token", null);
+      });
     }
   });
 
@@ -39,20 +41,20 @@ describe("Criar Filmes", () => {
 
     movieCases.forEach((testCase, index) => {
       it(`adicionar um novo filme com todas as informações necessárias - ${index}`, () => {
-          cy.request({
-            method: "POST",
-            url: "api/movies",
-            headers: {
-              Authorization: "Bearer " + Cypress.env("token"),
-            },
-            body: testCase,
-          }).then((resposta) => {
-            const movie = resposta.body;
-            expect(resposta.status).to.equal(201);
-            expect(movie).to.include(testCase);
-            expect(movie).to.have.property("id");
-          });
+        cy.request({
+          method: "POST",
+          url: "api/movies",
+          headers: {
+            Authorization: "Bearer " + Cypress.env("token"),
+          },
+          body: testCase,
+        }).then((resposta) => {
+          const movie = resposta.body;
+          expect(resposta.status).to.equal(201);
+          expect(movie).to.include(testCase);
+          expect(movie).to.have.property("id");
         });
+      });
     });
   });
 
@@ -380,29 +382,31 @@ describe("Criar Filmes", () => {
       cy.cadastroMockUser().then((userMock) => {
         cy.cadastroUser(userMock.name, userMock.email, userMock.password).then(
           (userCreated) => {
-            cy.loginUsuario(userMock.email, userMock.password).then((response) => {
-              token = response.body.accessToken;
+            cy.loginUsuario(userMock.email, userMock.password).then(
+              (response) => {
+                token = response.body.accessToken;
 
-              cy.request({
-                method: "POST",
-                url: "api/movies",
-                headers: {
-                  Authorization: "Bearer " + token,
-                },
-                body: {
-                  title: "os caça-fantasmas",
-                  genre: "Aventura",
-                  description:
-                    "Um trio estabelece uma empresa chamada Caça-Fantasmas, iniciando serviços de investigação e eliminação de entidades paranormais",
-                  durationInMinutes: 105,
-                  releaseYear: 1986,
-                },
-                failOnStatusCode: false,
-              }).then(function (resposta) {
-                expect(resposta.status).to.equal(403);
-                expect(resposta.body.message).to.equal("Forbidden");
-              });
-            });
+                cy.request({
+                  method: "POST",
+                  url: "api/movies",
+                  headers: {
+                    Authorization: "Bearer " + token,
+                  },
+                  body: {
+                    title: "os caça-fantasmas",
+                    genre: "Aventura",
+                    description:
+                      "Um trio estabelece uma empresa chamada Caça-Fantasmas, iniciando serviços de investigação e eliminação de entidades paranormais",
+                    durationInMinutes: 105,
+                    releaseYear: 1986,
+                  },
+                  failOnStatusCode: false,
+                }).then(function (resposta) {
+                  expect(resposta.status).to.equal(403);
+                  expect(resposta.body.message).to.equal("Forbidden");
+                });
+              }
+            );
           }
         );
       });

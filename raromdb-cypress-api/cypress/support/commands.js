@@ -96,6 +96,16 @@ Cypress.Commands.add("deletaUsuario", function (id, token) {
   });
 });
 
+Cypress.Commands.add("getUser", function (id, token) {
+  return cy.request({
+    method: "GET",
+    url: "/api/users/" + id,
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+});
+
 Cypress.Commands.add("listarReviews", function (token) {
   return cy
     .request({
@@ -289,10 +299,52 @@ Cypress.Commands.add("loginAdminCompleto", function () {
     cy.cadastroUser(userMock.name, userMock.email, userMock.password).then(
       (userCreated) => {
         cy.loginUsuario(userMock.email, userMock.password).then((response) => {
-          Cypress.env("token", response.body.accessToken);
-          cy.promoverAdmin(response.body.accessToken).then(() => {
-            return userCreated;
+          const token = response.body.accessToken;
+          Cypress.env("token", token);
+          cy.promoverAdmin(token).then(() => {
+            cy.getUser(userCreated.id, token).then(
+              ({ body: userCreatedAdmin }) => {
+                return userCreatedAdmin;
+              }
+            );
           });
+        });
+      }
+    );
+  });
+});
+
+Cypress.Commands.add("loginCriticoCompleto", function () {
+  cy.cadastroMockUser().then((userMock) => {
+    cy.cadastroUser(userMock.name, userMock.email, userMock.password).then(
+      (userCreated) => {
+        cy.loginUsuario(userMock.email, userMock.password).then((response) => {
+          const token = response.body.accessToken;
+          cy.promoverCritico(token).then(() => {
+            cy.getUser(userCreated.id, token).then(
+              ({ body: userCreatedCritic }) => {
+                return {
+                  userCreatedCritic,
+                  token,
+                };
+              }
+            );
+          });
+        });
+      }
+    );
+  });
+});
+
+Cypress.Commands.add("loginComumCompleto", function () {
+  cy.cadastroMockUser().then((userMock) => {
+    cy.cadastroUser(userMock.name, userMock.email, userMock.password).then(
+      (userCreated) => {
+        cy.loginUsuario(userMock.email, userMock.password).then((response) => {
+          return {
+            userCreated,
+            token: response.body.accessToken,
+          };
         });
       }
     );
