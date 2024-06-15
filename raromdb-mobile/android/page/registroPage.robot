@@ -4,6 +4,9 @@ Resource    ../base.robot
 Library    XML
 
 *** Variables ***
+${HOME_TXT}        xpath=//android.view.View[@content-desc="Home"]
+${MENU_HOME}       xpath=//android.widget.Button[@content-desc="Open navigation menu"]
+
 ${REGISTRE-SE}                 xpath=//android.view.View[@content-desc="Registre-se"]
 
 ${NOME_CADASTRO}               xpath=//android.widget.ImageView/android.widget.EditText[1]

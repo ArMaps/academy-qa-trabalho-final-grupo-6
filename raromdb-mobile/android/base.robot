@@ -4,7 +4,6 @@ Library    FakerLibrary
 Library    String
 Library    RequestsLibrary
 
-Resource    page/homePage.robot
 Resource    page/registroPage.robot
 Resource    page/loginPage.robot
 Resource    page/filmePage.robot
