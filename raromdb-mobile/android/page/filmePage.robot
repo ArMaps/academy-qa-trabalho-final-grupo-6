@@ -91,11 +91,11 @@ Então o usuario não deve conseguir realizar o review no filme desejado
     Espera o elemento e faz o clique        ${BTN_SALVAR}        
     Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${FACA_LOGIN}    content-desc    Faça login e tente novamente.
 
- Então o usuario não deve realizar o review no filme desejado sem inserir o texto avaliativo
+ Então o usuario deve realizar o review no filme desejado sem inserir o texto avaliativo
     Espera o elemento e faz o clique        ${BTN_ADICIONAR}
     Espera o elemento e faz o clique        ${ESTRELA}
     Espera o elemento e faz o clique        ${BTN_SALVAR}        
-    Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${SEM_REVIEW}    content-desc    Não foi possível adicionar sua review.
+    Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${REVIEW_ADICIONADA}    content-desc    Sua review foi adicionada!
 
 Então o usuario não deve realizar o review no filme desejado sem atribuir uma nota
     Espera o elemento e faz o clique        ${BTN_ADICIONAR}
@@ -104,3 +104,34 @@ Então o usuario não deve realizar o review no filme desejado sem atribuir uma 
     Espera o elemento e faz o clique        ${BTN_SALVAR}        
     Espera o elemento e faz o clique        ${BTN_SALVAR}        
     Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${SEM_REVIEW}    content-desc    Não foi possível adicionar sua review.
+
+ Então o usuario deve realizar o review do filme desejado com 200 caracteres
+    ${CARACTERES}    Generate Random String    length=200
+    Espera o elemento e faz o clique         ${BTN_ADICIONAR}
+    Espera o elemento e faz o clique         ${ESTRELA}
+    Espera o elemento e faz o clique         ${INPUT_TEXT}
+    Espera o elemento e faz o inputtext      ${INPUT_TEXT}           ${CARACTERES}
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${REVIEW_ADICIONADA}    content-desc    Sua review foi adicionada!
+
+
+Então o usuario deve realizar o review do filme desejado com 500 caracteres
+    ${CARACTERES}    Generate Random String    length=500
+    Espera o elemento e faz o clique         ${BTN_ADICIONAR}
+    Espera o elemento e faz o clique         ${ESTRELA}
+    Espera o elemento e faz o clique         ${INPUT_TEXT}
+    Espera o elemento e faz o inputtext      ${INPUT_TEXT}           ${CARACTERES}
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${REVIEW_ADICIONADA}    content-desc    Sua review foi adicionada!
+
+Então o usuario não deve realizar o review do filme desejado com 501 caracteres
+    ${CARACTERES}    Generate Random String    length=501
+    Espera o elemento e faz o clique         ${BTN_ADICIONAR}
+    Espera o elemento e faz o clique         ${ESTRELA}
+    Espera o elemento e faz o clique         ${INPUT_TEXT}
+    Espera o elemento e faz o inputtext      ${INPUT_TEXT}           ${CARACTERES}
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Espera o elemento e faz o clique         ${BTN_SALVAR}        
+    Wait Until Keyword Succeeds    5    1    AppiumLibrary.Element Attribute Should Match          ${REVIEW_ADICIONADA}    content-desc    Não foi possível adicionar sua review.

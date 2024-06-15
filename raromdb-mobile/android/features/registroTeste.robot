@@ -124,12 +124,15 @@ CT017 - tentativa de registo de usuário com email com 4 caracteres
     E clica em Registrar
     Então visualiza um alerta informe um email válido
 
+# Teste com BUG
+# O aplicativo deveria permitir o registro de usuário com email com 5 caracteres
 CT018 - tentativa de registo de usuário com email com 5 caracteres
     Dado que o usuário acessa a tela de registro
     Quando preenche todos os campos exceto o campo de email    123456    123456
     E insere um email com com 5 caracteres    a@m.c
     E clica em Registrar
-    Então visualiza um alerta informe um email válido
+    Então visualiza a mensagem de Cadastro realizado
+    E retorna para a tela inicial
 
 CT019 - tentativa de registo de usuário com email com 60 caracteres
     Dado que o usuário acessa a tela de registro
