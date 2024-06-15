@@ -58,7 +58,7 @@ describe("Deletar Filmes", () => {
     });
   });
 
-  it("Não deve permitir ao crítico deletar um filmee", () => {
+  it("Não deve permitir ao crítico deletar um filme", () => {
     const userTypeCritic = 2;
     expect(movie).to.have.property("id");
 
