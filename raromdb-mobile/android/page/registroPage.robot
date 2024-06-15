@@ -4,8 +4,6 @@ Resource    ../base.robot
 Library    XML
 
 *** Variables ***
-${MENU_HOME}       xpath=//android.widget.Button[@content-desc="Open navigation menu"]
-
 ${REGISTRE-SE}                 xpath=//android.view.View[@content-desc="Registre-se"]
 
 ${NOME_CADASTRO}               xpath=//android.widget.ImageView/android.widget.EditText[1]
@@ -21,10 +19,8 @@ ${CONFIRME_SENHA}              xpath=//android.view.View[@content-desc="Confirme
 ${SENHA_NAO_COINCIDE}          xpath=//android.view.View[@content-desc="As senhas não coincidem."]
 ${REGISTRAR}                   xpath=//android.widget.Button[@content-desc="Registrar"]
 ${CADASTRO_REALIZADO}          xpath=//android.view.View[@content-desc="Cadastro realizado!"]
-
 ${ERRO_CADASTRO}               xpath=//android.view.View[contains(@content-desc,"Ocorreu um erro ao realizar o cadastro.")]
 
-${HOME_TXT}        xpath=//android.view.View[@content-desc="Home"]
 
 *** Keywords ***
 Dado que o usuário acessa a tela de registro
@@ -174,16 +170,10 @@ E insere um email com com 61 caracteres
     Espera o elemento faz o clique e faz o inputtext    ${EMAIL_CADASTRO}    ${email_random}@mail.com 
 
 Dado que o usuário já possui um usuário cadastrado
-    ${email_random_usado}    Email
-    Dado que o usuário acessa a tela de registro
-    Quando preenche as informações obrigatórias    teste    ${email_random_usado}    123456    123456
-    Set Global Variable    ${email_random_usado}
-    E clica em Registrar
-    Então visualiza a mensagem de Cadastro realizado
-    E retorna para a tela inicial
+    Registro usuário via API
 Quando tenta realizar o cadastro utilizando o email já cadastrado anteriormente
     Dado que o usuário acessa a tela de registro
-    Quando preenche as informações obrigatórias    Teste Academy    ${email_random_usado}    123456    123456
+    Quando preenche as informações obrigatórias    Teste Academy    ${email_api}    123456    123456
 Então visualiza a mensagem de email já cadastrado
     Wait Until Element Is Visible    ${EMAIL_CADASTRADO}
     AppiumLibrary.Element Attribute Should Match    ${EMAIL_CADASTRADO}    content-desc    E-mail já cadastrado. Utilize outro e-mail.
