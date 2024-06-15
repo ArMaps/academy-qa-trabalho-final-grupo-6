@@ -79,15 +79,4 @@ describe("Deletar Filmes", () => {
     });
   });
 
-  // it("Não deve permitir ao crítico deletar um filme", () => {
-  //   cy.request({
-  //     method: "DELETE",
-  //     url: `/api/movies/${movie.id}`,
-  //     failOnStatusCode: false,
-  //     headers: {
-  //       Authorization: `Bearer ${user.accessToken}`,
-  //     },
-  //   }).then((response) => {
-  //     expect(response.status).to.equal(403);
-  // });
 });
