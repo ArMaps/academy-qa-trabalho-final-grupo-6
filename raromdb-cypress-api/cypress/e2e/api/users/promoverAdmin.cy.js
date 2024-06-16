@@ -13,7 +13,7 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
   var idFilmeM;
   context("Cenários de Tornar Admin com sucesso", () => {
     it("deve ser possível tornar usuario comum em admin", () => {
-      cy.registroUser(nome, "1" + email, senha);
+      cy.cadastroUserSemRetorno(nome, "1" + email, senha);
       cy.loginUsuario("1" + email, senha).then((usuario) => {
         token = usuario.body.accessToken;
         cy.request({
@@ -28,7 +28,7 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
       });
     });
     it("deve ser possível tornar usuario crítico em admim", () => {
-      cy.registroUser(nome, email, senha);
+      cy.cadastroUserSemRetorno(nome, email, senha);
       cy.loginUsuario(email, senha).then((usuario) => {
         token = usuario.body.accessToken;
         cy.promoverCritico(token);
@@ -44,7 +44,7 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
       });
     });
     it("deve ser possível identificar a review de um usuario admin", () => {
-      cy.registroUser(nome, "2" + email, senha).then((Usuario) => {
+      cy.cadastroUserSemRetorno(nome, "2" + email, senha).then((Usuario) => {
         id = Usuario.body.id;
       });
       cy.loginUsuario("2" + email, senha).then((usuario) => {
@@ -65,7 +65,7 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
       });
     });
     it("deve ser possível identificar a review de um usuario comum mesmo mudando posteriormente para admin", () => {
-      cy.registroUser(nome, "3" + email, senha).then((Usuario) => {
+      cy.cadastroUserSemRetorno(nome, "3" + email, senha).then((Usuario) => {
         id = Usuario.body.id;
       });
       cy.loginUsuario("3" + email, senha).then((usuario) => {
@@ -75,7 +75,7 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
           idFilmeM = idFilmeNovo;
         });
       });
-      cy.registroUser(nome, "4" + email, senha).then((Usuario) => {
+      cy.cadastroUserSemRetorno(nome, "4" + email, senha).then((Usuario) => {
         idM = Usuario.body.id;
         type = Usuario.body.type;
         cy.log(type);
@@ -102,8 +102,8 @@ describe("Cenários de testes de tornar usuário Administrador", () => {
   });
 
   describe("Cenários de BAD REQUEST", () => {
-    it("dNão deve ser possível tornar usuario em admin sem que esteja autenticado", () => {
-      cy.registroUser(nome, "5" + email, senha);
+    it("Não deve ser possível tornar usuario em admin sem que esteja autenticado", () => {
+      cy.cadastroUserSemRetorno(nome, "5" + email, senha);
       cy.request({
         method: "PATCH",
         url: "/api/users/admin",

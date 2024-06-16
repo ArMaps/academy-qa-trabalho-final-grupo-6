@@ -2,7 +2,7 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import ListarFilmesPage from "../pages/listarFilmes.page";
 import { faker } from "@faker-js/faker";
 var paginaListarFilmes = new ListarFilmesPage();
-var nome = 'João Pedrin';
+var nome = 'Zillaell';
 var email = faker.internet.email().toLowerCase();
 var senha = '123456';
 var id;
@@ -11,12 +11,12 @@ var token1;
 var movieid
 
 before(()=>{
-    cy.registroUser(nome, email, senha).then((response)=>{
+    cy.cadastroUserSemRetorno(nome, email, senha).then((response)=>{
         id = response.body.id;
     })
     cy.logarUser(email, senha).then((response)=>{
         token1 = response.body.accessToken;
-        cy.promoverAdmin(token1);
+        cy.tornarAdm(token1);
         cy.criarFilme2(token1).then((response=>{
             movieid = response.body.id
         }))
@@ -24,7 +24,7 @@ before(()=>{
 });
 
 after(()=>{
-    cy.deleteFilme(movieid, token1);
+    cy.deleteMovie(movieid, token1);
     cy.deletaUsuario(id,token1);
 });
 // 01: deve ser possível Listar Filmes com sucesso sem estar autenticado
@@ -115,9 +115,4 @@ Then('deve ser possível ver os detalhes do filme bem avaliado',()=>{
     cy.get(paginaListarFilmes.movieGenero).should('be.visible');
     cy.get(paginaListarFilmes.movieTempo).should('be.visible');
     cy.get(paginaListarFilmes.movieImagem).should('be.visible');
-});
-//10: deve ser possível visualizar o Listar filmes bem avaliados e verificar que estão na ordem 
-Then('deve ser possível verificar os filmes estão na ordem de nota',()=>{
-    cy.wait('@reviewsMock')
-    paginaListarFilmes.inspecionaMoviesTop();
 });

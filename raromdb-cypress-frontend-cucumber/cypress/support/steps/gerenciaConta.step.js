@@ -1,6 +1,6 @@
 import { Given, When, Then, Before } from "@badeball/cypress-cucumber-preprocessor";
 import { faker } from "@faker-js/faker";
-import LoginPage from "../pages/loginConta.page";
+import LoginPage from "../pages/loginUsuario.page";
 import EditPage from "../pages/gerenciaConta.page";
 import PerfilPage from "../pages/perfil.page";
 

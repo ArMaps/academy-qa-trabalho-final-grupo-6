@@ -35,7 +35,36 @@ Cypress.Commands.add("cadastroUser", function (nome, email, senha) {
     });
 });
 
-Cypress.Commands.add("tornarCritico", function (token) {
+Cypress.Commands.add("cadastroUserSemRetorno", function (nome, email, senha) {
+  return cy
+    .request({
+      method: "POST",
+      url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
+      body: {
+        name: nome,
+        email: email,
+        password: senha,
+      },
+    });
+});
+
+Cypress.Commands.add("cadastroUserRetornoId", function (nome, email, senha) {
+  return cy
+    .request({
+      method: "POST",
+      url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
+      body: {
+        name: nome,
+        email: email,
+        password: senha,
+      },
+    }).then(function(response){
+      var id = response.body.id;
+      return id;
+    });
+});
+
+Cypress.Commands.add("tornarCriticoErro", function (token) {
   return cy.request({
     method: "PATCH",
     url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/apply",
@@ -44,23 +73,6 @@ Cypress.Commands.add("tornarCritico", function (token) {
     },
     failOnStatusCode: false,
   });
-});
-
-Cypress.Commands.add("cadastroUsuario", function (nome, email, senha) {
-  return cy
-    .request({
-      method: "POST",
-      url: "/api/users",
-      body: {
-        name: nome,
-        email: email,
-        password: senha,
-      },
-    })
-    .then(function (response) {
-      const id = response.body.id;
-      return id;
-    });
 });
 
 Cypress.Commands.add("loginUsuario", function (email, senha) {
@@ -74,7 +86,7 @@ Cypress.Commands.add("loginUsuario", function (email, senha) {
   });
 });
 
-Cypress.Commands.add("deletarUsuario", (id, auth) => {
+Cypress.Commands.add("deletarUsuarioErro", (id, auth) => {
   cy.request({
     method: "DELETE",
     url: "/api/users/" + id,
@@ -85,7 +97,7 @@ Cypress.Commands.add("deletarUsuario", (id, auth) => {
   });
 });
 
-Cypress.Commands.add("promoverAdmin", (auth) => {
+Cypress.Commands.add("promoverAdminErro", (auth) => {
   cy.request({
     method: "PATCH",
     url: "/api/users/admin",
@@ -131,7 +143,7 @@ Cypress.Commands.add("listarReviews", function (token) {
     });
 });
 
-Cypress.Commands.add("criarFilme", function (token) {
+Cypress.Commands.add("criarFilmeReiLeao", function (token) {
   return cy.fixture("criarFilme.json").then(function (filmeCriado) {
     cy.request({
       method: "POST",
@@ -147,7 +159,7 @@ Cypress.Commands.add("criarFilme", function (token) {
   });
 });
 
-Cypress.Commands.add("criarReview", function (token, idFilme) {
+Cypress.Commands.add("criarReviewReiLeao", function (token, idFilme) {
   return cy.request({
     method: "POST",
     url: "/api/users/review",
@@ -162,39 +174,6 @@ Cypress.Commands.add("criarReview", function (token, idFilme) {
   });
 });
 
-Cypress.Commands.add("deletaUsuarioNaoAdm", function (id, token) {
-  return cy.request({
-    method: "DELETE",
-    url: "/api/users/" + id,
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-    failOnStatusCode: false,
-  });
-});
-
-Cypress.Commands.add("buscarFilmeId", function (id, token) {
-  return cy.request({
-    method: "GET",
-    url: "/api/movies/" + id,
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-});
-
-Cypress.Commands.add("registroUser", function (nome, email, senha) {
-  return cy.request({
-    method: "POST",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
-    body: {
-      name: nome,
-      email: email,
-      password: senha,
-    },
-  });
-});
-
 Cypress.Commands.add("promoverCritico", (token) => {
   cy.request({
     method: "PATCH",
@@ -204,6 +183,7 @@ Cypress.Commands.add("promoverCritico", (token) => {
     },
   });
 });
+
 Cypress.Commands.add("promoverAdmin", function (token) {
   return cy.request({
     method: "PATCH",
@@ -213,6 +193,7 @@ Cypress.Commands.add("promoverAdmin", function (token) {
     },
   });
 });
+
 Cypress.Commands.add("criarFilme", function (token) {
   return cy.fixture("criaFilme.json").then(function (filmeCriado) {
     cy.request({
@@ -227,6 +208,7 @@ Cypress.Commands.add("criarFilme", function (token) {
       return idFilmeNovo;
     });
   });
+
 });
 Cypress.Commands.add("criarFilme2", function (token) {
   return cy.fixture("criaFilme.json").then(function (filmeCriado) {
@@ -255,19 +237,11 @@ Cypress.Commands.add("criarReview", function (token, idFilme) {
     },
   });
 });
+
 Cypress.Commands.add("buscarFilmeId", function (id, token) {
   return cy.request({
     method: "GET",
     url: "/api/movies/" + id,
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-});
-Cypress.Commands.add("deletaUsuario", function (id, token) {
-  return cy.request({
-    method: "DELETE",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/" + id,
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -293,7 +267,7 @@ Cypress.Commands.add("criarReview2", function (token, idFilme) {
     },
   });
 });
-///////////////////// WEB //////////////////////////////////
+
 Cypress.Commands.add("deleteFilme", function (id, token) {
   return cy.request({
     method: "DELETE",
@@ -369,5 +343,23 @@ Cypress.Commands.add("criarFilmePersonalizado", function (token, movie) {
       Authorization: "Bearer " + token,
     },
     body: movie,
+  });
+});
+
+Cypress.Commands.add("inativarContaErro", function (token) {
+  return cy.request({
+    method: "PATCH",
+    url: "/api/users/inactivate",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    failOnStatusCode: false,
+  });
+});
+
+Cypress.Commands.add("listarFilmes", function () {
+  return cy.request({
+    method: "GET",
+    url: "/api/movies",
   });
 });

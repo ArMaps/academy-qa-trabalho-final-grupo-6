@@ -130,7 +130,7 @@ describe('Login de usuário', () => {
         token = response.body.accessToken;
         expect(token).to.not.eq(tokenInvalido);
       });
-      cy.tornarCritico(tokenInvalido).then(function (response) {
+      cy.tornarCriticoErro(tokenInvalido).then(function (response) {
         expect(response.status).to.eq(401);
         cy.fixture("acessoNegado").then(function (acessoNegado) {
           expect(response.body).to.deep.eq(acessoNegado);

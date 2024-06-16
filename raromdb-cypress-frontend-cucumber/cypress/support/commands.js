@@ -26,7 +26,7 @@
 
 
 import RegistroPage from "./pages/registroUsuario.page";
-import LoginPage from "./pages/login.page";
+import LoginPage from "./pages/loginUsuario.page";
 var paginaRegistro = new RegistroPage();
 var paginaLogin = new LoginPage();
 
@@ -45,8 +45,30 @@ Cypress.Commands.add('cadastroUser', function (nome, email, senha) {
             password: senha
         }
     }).then(function (response) {
-         var id = response.body.id;
+        var id = response.body.id;
         return id;
+    });
+});
+
+Cypress.Commands.add('deletaUsuario', function (id, token) {
+    return cy.request({
+        method: 'DELETE',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/' + id,
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    });
+});
+
+Cypress.Commands.add('cadastroUserSemRetorno', function (nome, email, senha) {
+    return cy.request({
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+        body: {
+            name: nome,
+            email: email,
+            password: senha
+        }
     });
 });
 
@@ -65,6 +87,19 @@ Cypress.Commands.add('criarFilme', function (token) {
 
 Cypress.Commands.add('criarSegundoFilme', function (token) {
     return cy.fixture('criarFilme2.json').then(function (filmeCriado) {
+        cy.request({
+            method: 'POST',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            body: filmeCriado,
+        });
+    });
+});
+
+Cypress.Commands.add('criarFilme2', function (token) {
+    return cy.fixture('criaFilme.json').then(function (filmeCriado) {
         cy.request({
             method: 'POST',
             url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',

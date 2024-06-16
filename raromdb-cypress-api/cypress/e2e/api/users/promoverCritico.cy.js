@@ -16,7 +16,7 @@ context('Usuario ativos', ()=> {
         })
         afterEach(() => {
             cy.promoverAdmin(auth)
-            cy.deletarUsuario(id, auth)
+            cy.deletaUsuario(id, auth)
         })
         it('Usuario deve ser promovido a critico com sucesso', () => {
             cy.request({
@@ -81,7 +81,7 @@ context('Usuario ativos', ()=> {
         })
         it('Usuario excluido nao  deve ser promovido a critico ', () => {
             cy.promoverAdmin(auth)
-            cy.deletarUsuario(id, auth)
+            cy.deletaUsuario(id, auth)
             cy.request({
                 method: 'PATCH',
                 url: '/api/users/apply',

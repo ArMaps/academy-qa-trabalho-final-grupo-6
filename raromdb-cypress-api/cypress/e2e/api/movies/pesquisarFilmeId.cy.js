@@ -20,7 +20,7 @@ describe("Cenários de testes de Review de Filme", () => {
 
   beforeEach(() => {
     email = fakerPT_BR.internet.email().toLowerCase();
-    cy.registroUser(nome, email, senha).then((response) => {
+    cy.cadastroUserSemRetorno(nome, email, senha).then((response) => {
       id = response.body.id;
     });
     cy.loginUsuario(email, senha).then((usuario) => {
@@ -36,7 +36,7 @@ describe("Cenários de testes de Review de Filme", () => {
         });
       });
     });
-    cy.registroUser(nome, "C" + email, senha).then((response) => {
+    cy.cadastroUserSemRetorno(nome, "C" + email, senha).then((response) => {
       id2 = response.body.id;
     });
     cy.loginUsuario("C" + email, senha).then((usuario) => {
@@ -48,7 +48,7 @@ describe("Cenários de testes de Review de Filme", () => {
     });
   });
   afterEach(() => {
-    cy.registroUser("m" + nome, "mock" + email, senha).then((response) => {
+    cy.cadastroUserSemRetorno("m" + nome, "mock" + email, senha).then((response) => {
       id3 = response.body.id;
     });
     cy.loginUsuario("mock" + email, senha).then((usuario) => {
@@ -74,7 +74,7 @@ describe("Cenários de testes de Review de Filme", () => {
   });
   context("Cenários de Pesquisar Filme por Id com sucesso", () => {
     it("deve ser possível Pesquisar Filme por Id sendo usuario não autenticado", () => {
-      cy.registroUser(nomex, emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.buscarFilmeId(idFilme, token2).then((response) => {
@@ -91,7 +91,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível Pesquisar Filme por Id sendo usuario do tipo comum", () => {
-      cy.registroUser(nomex, emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.loginUsuario(emaill, senha).then((usuario) => {
@@ -111,7 +111,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível Pesquisar Filme por Id sendo usuario do tipo critico", () => {
-      cy.registroUser(nomex, emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.loginUsuario(emaill, senha).then((usuario) => {
@@ -132,7 +132,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível Pesquisar Filme por Id sendo usuario do tipo admin", () => {
-      cy.registroUser(nomex, emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.loginUsuario(emaill, senha).then((usuario) => {
@@ -153,7 +153,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível consultar os detalhes dos filmes registrados no catálogo", () => {
-      cy.registroUser(nomex, emaill, senha);
+      cy.cadastroUserSemRetorno(nomex, emaill, senha);
       cy.buscarFilmeId(idFilme, token2).then((response) => {
         expect(response.body.id).to.eq(idFilme);
         expect(response.body).to.have.property("id");
@@ -179,7 +179,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível visualizar um totalizador das avaliações de audiencia", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.loginUsuario("2" + emaill, senha).then((usuario) => {
@@ -196,7 +196,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível visualizar um totalizador das avaliações de críticos", () => {
-      cy.registroUser(nomex, "3" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "3" + emaill, senha).then((response) => {
         id1 = response.body.id;
       });
       cy.loginUsuario("3" + emaill, senha).then((usuario) => {
@@ -214,7 +214,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível visualizar os detalhes das avaliações", () => {
-      cy.registroUser(nomex, "1" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "1" + emaill, senha).then((response) => {
         id1 = response.body.id;
         type1 = response.body.type;
       });

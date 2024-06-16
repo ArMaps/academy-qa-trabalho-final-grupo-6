@@ -18,7 +18,7 @@ describe("Cenários de testes de Review de Filme", () => {
 
   beforeEach(() => {
     email = fakerPT_BR.internet.email().toLowerCase();
-    cy.registroUser(nome, email, senha).then((response) => {
+    cy.cadastroUserSemRetorno(nome, email, senha).then((response) => {
       id = response.body.id;
       type = response.body.type;
     });
@@ -31,7 +31,7 @@ describe("Cenários de testes de Review de Filme", () => {
     });
   });
   afterEach(() => {
-    cy.registroUser("m" + nome, "mock" + email, senha).then((response) => {
+    cy.cadastroUserSemRetorno("m" + nome, "mock" + email, senha).then((response) => {
       id3 = response.body.id;
     });
     cy.loginUsuario("mock" + email, senha).then((usuario) => {
@@ -54,7 +54,7 @@ describe("Cenários de testes de Review de Filme", () => {
 
   context("Cenários de Review de Filme com sucesso", () => {
     it("deve ser possível fazer a Review de Filme sendo um usuário do tipo admin", () => {
-      cy.registroUser(nomex, emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -81,7 +81,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível fazer a Review de Filme sendo um usuário do tipo critico", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -107,7 +107,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível fazer a Review de Filme sendo um usuário do tipo comum", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -132,7 +132,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível fazer review de filme com nota e texto de 500 caracteres.", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -167,7 +167,7 @@ describe("Cenários de testes de Review de Filme", () => {
     });
     /////////////////////////////////////////BUG/////////////////////////////////////////////
     it("deve ser possível fazer review de filme somente com nota", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -199,7 +199,7 @@ describe("Cenários de testes de Review de Filme", () => {
     /////////////////////////////////////////////////////////////////////////////////////////
 
     it("deve ser possível fazer review de filme com nota 1", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -229,7 +229,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("deve ser possível fazer review de filme com nota 5", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -259,7 +259,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("não deve ser possível criar 2 reviews de um filme por usuário, apenas atualizar a mesma.", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -306,7 +306,7 @@ describe("Cenários de testes de Review de Filme", () => {
   // ################################## BAD REQUEST ###################################
   describe("Cenários de BAD REQUEST", () => {
     it("não deve ser possível fazer review de filme sem estar autenticado", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -335,7 +335,7 @@ describe("Cenários de testes de Review de Filme", () => {
         });
     });
     it("não deve ser possível fazer review de filme sem nota", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -367,7 +367,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("não deve ser possível fazer review de filme com nota 0", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -399,7 +399,7 @@ describe("Cenários de testes de Review de Filme", () => {
       });
     });
     it("não deve ser possível fazer review de filme com nota 6", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -432,7 +432,7 @@ describe("Cenários de testes de Review de Filme", () => {
     });
     /////////////////////////////////////////////BUG////////////////////////////////////////////////////
     it("não deve ser possível fazer review de filme com nota sem ser valor inteiro", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
@@ -465,7 +465,7 @@ describe("Cenários de testes de Review de Filme", () => {
     });
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     it("não deve ser possível fazer review de filme texto com 501 caracteres.", () => {
-      cy.registroUser(nomex, "2" + emaill, senha).then((response) => {
+      cy.cadastroUserSemRetorno(nomex, "2" + emaill, senha).then((response) => {
         id2 = response.body.id;
         type2 = response.body.type;
       });
