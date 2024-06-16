@@ -1,5 +1,15 @@
 import { faker } from "@faker-js/faker";
 
+Cypress.Commands.add('inativarUsuario', function(token){
+  cy.request({
+    method:'PATCH',
+    url: '/api/users/inactivate',
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+})
+
 Cypress.Commands.add("cadastroMockUser", function () {
   return {
     name: "faker " + faker.person.firstName(),
