@@ -1,0 +1,96 @@
+{
+    "id": 1,
+    "title": "O Rei Leão",
+    "description": "Um traíra trai o irmão e faz o sobrinho ter rancor",
+    "genre": "Aventura e ação",
+    "reviews": [
+        {
+            "id": 4,
+            "reviewText": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "reviewType": 0,
+            "score": 5,
+            "updatedAt": "2024-06-16T17:01:53.751Z",
+            "user": {
+                "id": 21,
+                "name": "Jamie Freeman",
+                "type": 1
+            }
+        },
+        {
+            "id": 5,
+            "reviewText": "Pensao num filmao",
+            "reviewType": 0,
+            "score": 5,
+            "updatedAt": "2024-06-16T17:02:53.756Z",
+            "user": {
+                "id": 26,
+                "name": "Corey Dyer",
+                "type": 0
+            }
+        },
+        {
+            "id": 6,
+            "reviewText": "Pensao num filmao",
+            "reviewType": 0,
+            "score": 5,
+            "updatedAt": "2024-06-16T17:03:23.230Z",
+            "user": {
+                "id": 30,
+                "name": "Brittany Gates",
+                "type": 0
+            }
+        },
+        {
+            "id": 8,
+            "reviewText": "Pensao num filmao",
+            "reviewType": 0,
+            "score": 5,
+            "updatedAt": "2024-06-16T17:03:48.176Z",
+            "user": {
+                "id": 34,
+                "name": "Adriana Mccormick",
+                "type": 0
+            }
+        },
+        {
+            "id": 9,
+            "reviewText": "Pensao num filmao",
+            "reviewType": 0,
+            "score": 5,
+            "updatedAt": "2024-06-16T17:04:40.705Z",
+            "user": {
+                "id": 38,
+                "name": "Melissa Campbell",
+                "type": 0
+            }
+        },
+        {
+            "id": 10,
+            "reviewText": "Filme bom",
+            "reviewType": 1,
+            "score": 3,
+            "updatedAt": "2024-06-16T18:06:40.705Z",
+            "user": {
+                "id": 53,
+                "name": "Gabriel Peluzio",
+                "type": 2
+            }
+        },
+        {
+            "id": 11,
+            "reviewText": "Filme lixo",
+            "reviewType": 1,
+            "score": 4,
+            "updatedAt": "2024-06-12T15:08:32.705Z",
+            "user": {
+                "id": 62,
+                "name": "Joao Pedro",
+                "type": 2
+            }
+        }
+    ],
+    "durationInMinutes": 88,
+    "releaseYear": 1994,
+    "criticScore": 3.5,
+    "audienceScore": 5
+}
