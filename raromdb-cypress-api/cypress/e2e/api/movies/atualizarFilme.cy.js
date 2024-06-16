@@ -25,7 +25,7 @@ describe('Testes da /api/movie/id', () => {
             })
         })
         afterEach(() => {
-            cy.deletarUsuario(id, auth)
+            cy.deletaUsuario(id, auth)
         })
         it('Deve atualizar o titulo com sucesso', () => {
             cy.request({

@@ -1,0 +1,32 @@
+[
+    {
+        "movieId": 1,
+        "score": 5,
+        "reviewText": "string"
+    },
+    {
+        "movieId": 5,
+        "score": 1,
+        "reviewText": "string"
+    },
+    {
+        "movieId": 2,
+        "score": 4,
+        "reviewText": "string"
+    },
+    {
+        "movieId": 3,
+        "score": 5,
+        "reviewText": "string"
+    },
+    {
+        "movieId": 6,
+        "score": 2,
+        "reviewText": "string"
+    },
+    {
+        "movieId": 4,
+        "score": 3,
+        "reviewText": "string"
+    }
+]

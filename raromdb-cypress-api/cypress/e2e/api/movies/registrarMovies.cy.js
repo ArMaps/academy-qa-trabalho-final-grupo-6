@@ -1,4 +1,4 @@
-import { movieCases } from "../../../fixtures/cases/movieCases";
+import { movieCases } from "../../../fixtures/cases/moviesCases";
 
 describe("Criar Filmes", () => {
   let user, movieId;

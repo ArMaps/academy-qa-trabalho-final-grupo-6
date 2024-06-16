@@ -19,7 +19,7 @@ describe('Testes da /api/users/{id}', () => {
         })
         afterEach(() => {
             cy.promoverAdmin(auth)
-            cy.deletarUsuario(id, auth)
+            cy.deletaUsuario(id, auth)
         })
         it('Deve atualizar o nome com sucesso', () => {
             cy.request({
@@ -324,7 +324,7 @@ describe("Testes da /api/users/{id}", () => {
             
         })
         afterEach(() => {
-            cy.deletarUsuario(id, auth)
+            cy.deletaUsuario(id, auth)
         })
         it('Deve ser possivel  atualizar as informacoes sendo um usuario admin', () => {
             cy.request({
@@ -354,25 +354,21 @@ describe("Testes da /api/users/{id}", () => {
             })
             cy.loginUsuario(emailcritico, senha).then((response) => {
                 auth = response.body.accessToken;
-                cy.tornarCritico(auth);
+                cy.promoverCritico(auth);
             })
-        })
-        afterEach(() => {
-            cy.deletarUsuario(id, auth)
         })
         it('Deve ser possivel  atualizar as informacoes sendo um usuario critico', () => {
             cy.request({
                 method: 'PUT',
                 url: '/api/users/' + id,
+                headers: {
+                    Authorization: 'Bearer ' + auth,
+                },
                 body:
                 {
                     name: faker.person.firstName(),
                     password: faker.internet.password(7)
-                },
-                headers: {
-                    Authorization: 'Bearer ' + auth,
-                },
-                failOnStatusCode: false
+                }
             }).then((response) => {
                 expect(response.status).to.be.eq(200)
                 expect(response.body.active).to.be.eq(true)
