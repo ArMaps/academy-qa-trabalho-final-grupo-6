@@ -1,0 +1,31 @@
+name: Projeto Final Web-API-Mobile
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_e_test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: cd raromdb-cypress-api
+    - run: npm install
+    - run: npm test
+    - run: cd ..
+    - run: cd raromdb-cypress-frontend-cucumber
+    - run: npm install
+    - run: npm test
