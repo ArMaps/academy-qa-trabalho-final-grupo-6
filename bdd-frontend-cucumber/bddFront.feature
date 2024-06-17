@@ -462,63 +462,72 @@ Quando ele acessa a área de detalhes de determinado filme
 Então ele consegue visualizar as informações das avaliações
 
 
-Funcionalidade: Avaliação de Filmes
+Funcionalidade: Avaliação de Filmes 
 
 Cenário: Deve ser possível escreve uma avaliação e atribuir uma nota para o filme
-Dado que um usuário está logado
-Quando ele escreve uma avaliação e atribui uma nota para o filme
-Então a avaliação e a nota são salvas com sucesso
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele escreve uma avaliação e atribui uma nota para o filme
+    Então a avaliação e a nota são salvas com sucesso
 
 Cenário: Deve ser possível atribuir nota a uma avaliação sem escrever sobre o filme
-Dado que um usuário está logado
-Quando ele atribui uma nota ao filme sem escrever uma avaliação
-Então a nota é salva com sucesso
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele atribui uma nota para o filme
+    Então a avaliação e a nota são salvas com sucesso
 
 Cenário: Deve ser possível escrever uma avaliação com 500 caracteres
-Dado que um usuário está logado
-Quando ele escreve uma avaliação com 500 caracteres
-Então a avaliação é salva com sucesso
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele escreve uma avaliação e atribui uma nota para o filme
+    Então a avaliação e a nota são salvas com sucesso
 
-Cenário: Deve ser possível um usuário comum poder atribuir uma avaliação ao filme
-Dado que um usuário comum está logado
-Quando ele escreve uma avaliação e atribui uma nota ao filme
-Então a avaliação e a nota são salvas com sucesso
 
-Cenário: Deve ser possível um usuário crítico poder atribuir uma avaliação ao filme
-Dado que um usuário crítico está logado
-Quando ele escreve uma avaliação e atribui uma nota ao filme
-Então a avaliação e a nota são salvas com sucesso
+Cenário: Deve poder refazer sua avaliação de filme
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele escreve uma avaliação e atribui uma nota para o filme
+    E escrever uma segunda avaliação para o mesmo filme
+    Então a avaliação é atualizada
 
-Cenário: Deve ser possível um usuário administrador poder atribuir uma avaliação ao filme
-Dado que um usuário administrador está logado
-Quando ele escreve uma avaliação e atribui uma nota ao filme
-Então a avaliação e a nota são salvas com sucesso
-
-Cenário: Deve ser possível atribuir uma avaliação de texto com até 500 caracteres
-Dado que um usuário está logado
-Quando ele escreve uma avaliação de até 500 caracteres
-Então a avaliação é salva com sucesso
-
-Cenário: Deve somente ter uma avaliaçãoter por usuário no filme
-Dado que um usuário está logado
-Quando ele escreve uma avaliação
-E tenta escrever uma segunda avaliação para o mesmo filme
-Então a segunda avaliação não é salva e uma mensagem de erro é exibida
 
 Cenário: Não deve ser possível um usuario não logado poder atribuir uma avaliação ao filme
-Dado que um usuário não está logado
-Quando ele tenta escrever uma avaliação ou atribuir uma nota ao filme
-Então a avaliação e a nota não são salvas e uma mensagem de erro é exibida
+    Dado que o usuário não logado sistema
+    E há filmes cadastrados
+    E aparece um botão de filme
+    E ele tenta escrever uma avaliação e atribuir uma nota ao filme
+    E é redirecionada para a página de login
 
 Cenário: Não deve ser possível avalia sem atribuir nota ao filme
-Dado que um usuário está logado
-Quando ele tenta escrever uma avaliação sem atribuir uma nota ao filme
-Então a avaliação não é salva e uma mensagem de erro é exibida
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele tenta escrever uma avaliação sem atribuir uma nota ao filme
+    Então a avaliação não é salva e uma mensagem de erro é exibida
 
 Cenário: Não deve ser possível atribuir uma avaliação de texto com mais que 500 caracteres
-Dado que um usuário está logado
-Quando ele tenta escrever uma avaliação com mais de 500 caracteres
-Então a avaliação não é salva e uma mensagem de erro é exibida
+    Dado que o usuário acessou o sistema
+    Quando ele loga com sucesso
+    E há filmes cadastrados
+    E pesquisa pelo título de um filme no catálogo
+    E acessa clica em filme encontrado
+    E ele tenta escrever uma avaliação com 501 caracteres
+    Então a avaliação não é salva e nada acontece
+
 
 
 Funcionalidade: Consulta de avaliações do usuário
