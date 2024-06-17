@@ -1,7 +1,7 @@
 export default class LoginPage {
     linkLogin = '[href="/login"]';
     linkPerfil = 'a.movies-page-link[href="/profile"]';
-
+    loginContent = '.login-content'
     inputEmail = ':nth-child(1) > input';
     inputSenha = '.login-form > :nth-child(2) > input';
 

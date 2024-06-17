@@ -16,6 +16,7 @@
     "@badeball/cypress-cucumber-preprocessor": "^20.0.5",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "cypress": "^13.10.0",
-    "esbuild": "^0.21.4"
+    "esbuild": "^0.21.4",
+    "@faker-js/faker": "^8.4.1"
   }
 }
