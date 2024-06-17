@@ -275,7 +275,7 @@ it('deve ser possível registrar usuário com email com 5 dígitos', () => {
 ////////////////////////////BAD REQUEST/////////////////////////////
     describe('Cenários de BAD REQUEST: ',()=>[
         before(function () {
-            cy.registroUser(nome, email, senha);
+            cy.cadastroUserSemRetorno(nome, email, senha);
           }),
         it('não deve ser possível registrar usuário sem inserir o campo nome',()=>{
             cy.request({
@@ -363,13 +363,12 @@ it('deve ser possível registrar usuário com email com 5 dígitos', () => {
         }),
 /////////////////////////////////////////BUG/////////////////////////////////////////////        
         after(()=>{
-            cy.registroUser(nome,'zi'+email,senha) .then((response)=>{
+            cy.cadastroUserSemRetorno(nome,'zi'+email,senha).then((response)=>{
                      id = response.body.id;                     
                 });
                 cy.loginUsuario('zi'+email, senha).then((usuario) => {
                     token = usuario.body.accessToken;
                     cy.promoverAdmin(token);
-                    cy.deletaUsuario(idZ, token);
                     cy.deletaUsuario(id, token);
                 })    
         }),
@@ -388,7 +387,12 @@ it('deve ser possível registrar usuário com email com 5 dígitos', () => {
                 expect(response.status).to.be.eq(400);
                 expect(response.body).to.be.an('object');
                 cy.fixture('emailInvalido.json').then(function (emailInvalido) {
-                  expect(response.body).to.deep.eq(emailInvalido)
+                    expect(response.body).to.deep.eq(emailInvalido)
+                });
+                cy.loginUsuario(email, senha).then(function(usuario){
+                    token = usuario.body.accessToken;
+                    cy.promoverAdmin(token);
+                    cy.deletaUsuario(idZ, token);
                 });
             })
         }),

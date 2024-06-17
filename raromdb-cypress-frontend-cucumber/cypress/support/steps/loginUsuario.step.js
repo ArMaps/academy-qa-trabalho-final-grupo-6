@@ -1,10 +1,10 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { faker } from '@faker-js/faker';
 import LoginPage from '../pages/loginUsuario.page';
-import GerenciaPage from '../pages/gerencia.page';
+import EditPage from '../pages/gerenciaConta.page';
 import PerfilPage from '../pages/perfil.page';
 
-var paginaGerencia = new GerenciaPage();
+var paginaGerencia = new EditPage();
 var paginaPerfil = new PerfilPage();
 var paginaLogin = new LoginPage();
 var nome = 'João Pedro';
@@ -19,7 +19,9 @@ before(function () {
 });
 
 Given('que o usuário acessou o sistema', function () {
+    cy.intercept('GET', '/api/movies').as('getMovies');
     cy.visit('');
+    cy.wait('@getMovies');
 });
 
 When('ele acessa a área de login', function () {

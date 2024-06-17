@@ -1,0 +1,63 @@
+[
+    {
+        "id": 1,
+        "title": "Harry Potter e a Pedra Filosofal",
+        "genre": "Aventura e ação",
+        "description": "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens bruxos.",
+        "durationInMinutes": 152,
+        "releaseYear": 2001
+    },
+    {
+        "id": 2,
+        "title": "Harry Potter e a Camera Secreta",
+        "genre": "Aventura e Ação",
+        "description": "Após as sofríveis férias na casa dos tios, Harry Potter se prepara para voltar a Hogwarts e começar seu segundo ano na escola de bruxos",
+        "durationInMinutes": 161,
+        "releaseYear": 2002
+    },
+    {
+        "id": 3,
+        "title": "Harry Potter e o Prisioneiro de Azkaban",
+        "genre": "Aventura e Ação",
+        "description": "É o início do terceiro ano na escola de bruxaria Hogwarts. Harry, Ron e Hermione têm muito o que aprender. Mas uma ameaça ronda a escola e ela se chama Sirius Black",
+        "totalRating": null,
+        "durationInMinutes": 147,
+        "releaseYear": 2004
+    },
+    {
+        "id": 4,
+        "title": "Harry Potter e o Cálice de Fogo",
+        "genre": "Aventura e Ação",
+        "description": "Harry retorna para seu quarto ano na Escola de Magia e Bruxaria de Hogwarts, junto com os seus amigos Ron e Hermione",
+        "totalRating": null,
+        "durationInMinutes": 157,
+        "releaseYear": 2005
+    },
+    {
+        "id": 5,
+        "title": "Harry Potter e a Ordem da Fênix",
+        "genre": "Aventura e Ação",
+        "description": "Harry retorna para seu quinto ano na Escola de Magia e Bruxaria de Hogwarts",
+        "totalRating": null,
+        "durationInMinutes": 138,
+        "releaseYear": 2007
+    },
+    {
+        "id": 6,
+        "title": "Harry Potter e o Enigma do Príncipe",
+        "genre": "Aventura e Ação",
+        "description": "Harry retorna para seu sexto ano na Escola de Magia e Bruxaria de Hogwarts",
+        "totalRating": null,
+        "durationInMinutes": 153,
+        "releaseYear": 2009
+    },
+    {
+        "id": 7,
+        "title": "Harry Potter e as Relíquias da Morte: Parte 1",
+        "genre": "Aventura e Ação",
+        "description": "Harry retorna para seu setimo ano na Escola de Magia e Bruxaria de Hogwarts",
+        "totalRating": null,
+        "durationInMinutes": 146,
+        "releaseYear": 2010
+    }
+]

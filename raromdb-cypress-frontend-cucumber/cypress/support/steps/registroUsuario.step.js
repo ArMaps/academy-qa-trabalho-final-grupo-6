@@ -3,17 +3,15 @@ import { faker } from "@faker-js/faker";
 import HomePage from "../pages/home.page";
 import RegistroPage from "../pages/registroUsuario.page";
 import PerfilPage from "../pages/perfil.page";
-import GerenciaPage from "../pages/gerencia.page";
+import EditPage from "../pages/gerenciaConta.page";
 
-var paginaGerencia = new GerenciaPage();
+var paginaGerencia = new EditPage();
 var paginaPerfil = new PerfilPage();
 var paginaHome = new HomePage();
 var paginaRegistro = new RegistroPage();
 var novoEmail;
 var nomeUsuario = 'JP';
 var password = '123456';
-
-
 
 Given('que o usuário acessou o sistema', function(){
     cy.intercept('GET', '/api/movies').as('getMovies');

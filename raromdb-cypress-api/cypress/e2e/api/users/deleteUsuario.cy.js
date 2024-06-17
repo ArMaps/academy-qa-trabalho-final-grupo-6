@@ -15,14 +15,14 @@ describe('Exclusão de usuário', function () {
         beforeEach(function () {
             email = faker.internet.email().toLowerCase();
             email2 = faker.internet.email().toLowerCase();
-            cy.cadastroUsuario(nome, email, senha).then(function (idUser) {
+            cy.cadastroUserRetornoId(nome, email, senha).then(function (idUser) {
                 id = idUser;
                 cy.loginUsuario(email, senha).then(function (usuario) {
                     token = usuario.body.accessToken;
                     cy.promoverAdmin(token);
                 });
             });
-            cy.cadastroUsuario(nome, email2, senha).then(function (idUser2) {
+            cy.cadastroUserRetornoId(nome, email2, senha).then(function (idUser2) {
                 id2 = idUser2;
             });
         });
@@ -49,9 +49,9 @@ describe('Exclusão de usuário', function () {
                 cy.promoverAdmin(token2).then(function(response){
                     expect(response.status).to.eq(204);
                 });
-                cy.criarFilme(token).then(function (movieId) {
+                cy.criarFilmeReiLeao(token).then(function (movieId) {
                     idFilme = movieId;
-                    cy.criarReview(token2, idFilme).then(function (response) {
+                    cy.criarReviewReiLeao(token2, idFilme).then(function (response) {
                         expect(response.status).to.eq(201);
                     });
                     cy.deletaUsuario(id2, token).then(function (response) {
@@ -71,19 +71,19 @@ describe('Exclusão de usuário', function () {
         beforeEach(function () {
             email = faker.internet.email().toLowerCase();
             email2 = faker.internet.email().toLowerCase();
-            cy.cadastroUsuario(nome, email, senha).then(function (idUser) {
+            cy.cadastroUserRetornoId(nome, email, senha).then(function (idUser) {
                 id = idUser;
                 cy.loginUsuario(email, senha).then(function (usuario) {
                     token = usuario.body.accessToken;
                 });
             });
-            cy.cadastroUsuario(nome, email2, senha).then(function (idUser2) {
+            cy.cadastroUserRetornoId(nome, email2, senha).then(function (idUser2) {
                 id2 = idUser2;
             });
         });
         
         it('Não deve permitir que um usuário não admin exclua sua própria conta', function () {
-            cy.deletaUsuarioNaoAdm(id, token).then(function (response) {
+            cy.deletarUsuarioErro(id, token).then(function (response) {
                 cy.fixture('deleteUserNaoAdm.json').then(function (notAdm) {
                     expect(response.body).to.deep.eq(notAdm);
                     expect(notAdm).to.be.an('object');
@@ -92,7 +92,7 @@ describe('Exclusão de usuário', function () {
         });
 
         it('Não deve permitir que um usuário não admin exclua a conta de outro usuário', function () {
-            cy.deletaUsuarioNaoAdm(id2, token).then(function (response) {
+            cy.deletarUsuarioErro(id2, token).then(function (response) {
                 cy.fixture('deleteUserNaoAdm.json').then(function (notAdm) {
                     expect(response.body).to.deep.eq(notAdm);
                     expect(notAdm).to.be.an('object');

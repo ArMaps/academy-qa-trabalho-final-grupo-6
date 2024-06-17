@@ -3,7 +3,7 @@
 Funcionalidade: Listar Filmes
 
 Contexto: Acesso à área de cadastro de usuários
-    Dado que o usuário acessa o site
+  Dado que o usuário acessa o site
 
 Cenário: deve ser possível Listar Filmes com sucesso sem estar autenticado
   Quando acessa a funcionalidade de Listar Filmes
